@@ -36,21 +36,21 @@ def main():
 	trndata._convertToOneOfMany( )
 	tstdata._convertToOneOfMany( )
 	emotion={}
-				
 	if os.path.isfile('train.xml'):
-		fnn=NetworkReader('train.xml')
+		fnn=NetworkReader.readFrom('train.xml')
 	else:
 		fnn=buildNetwork(1292,1,2,outclass=SoftmaxLayer)
-	NetworkWriter.writeToFile(fnn, 'test.xml')
+	NetworkWriter.writeToFile(fnn, 'train.xml')
 	print('starting training')
 	trainer=BackpropTrainer(fnn,dataset=trndata,momentum=0.1,verbose=True,weightdecay=0.01)	
-	for i in range(1,100):
-		print('epoch level '+str(i))
-		trainer.trainEpochs(i)
-		trnresult=percentError(trainer.testOnData(),trndata['class'])
-		tstresult=percentError(trainer.testOnClassData(dataset=tstdata),tstdata['class'])
-		r_server.set('errortest'+str(i),tstresult)
-		r_server.set('errortrain'+str(i),trnresult)
+	
+	print('epoch level '+str(1000))
+	trainer.trainEpochs(216000)
+	NetworkWriter.writeToFile(fnn, 'train.xml')
+	#trnresult=percentError(trainer.testOnData(),trndata['class'])
+	#tstresult=percentError(trainer.testOnClassData(dataset=tstdata),tstdata['class'])
+	r_server.set('errortest'+str(i),tstresult)
+	r_server.set('errortrain'+str(i),trnresult)
 
 
 

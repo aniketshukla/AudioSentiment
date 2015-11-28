@@ -1,0 +1,1495 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css"/>
+<script src="../static/bootstrap-3.3.5-dist/js/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-3.3.5-dist/css/bootstrap.min.css') }}"/>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-3.3.5-dist/css/bootstrap-theme.min.css') }}"/>
+
+<script src="{{ url_for('static', filename='bootstrap-3.3.5-dist/js/jquery-1.11.3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jqueryui/jquery-ui.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jqueryui/jquery-ui.min.css') }}"/>
+
+
+<style>
+
+body{
+	background-color: #7ECBE5;
+	   box-shadow: 10px 10px 5px #888888;
+	   z-index: 1;
+}
+table{
+	table-layout: fixed;
+	overflow: auto;
+}
+
+.background_white{
+	
+	color:black;
+}
+
+
+
+
+th,td{
+	width: 10px;
+	min-width: 10px;
+	max-width: 10px;
+	padding: 10px;
+	text-align: center;
+	border-collapse: collapse;	
+	border-width: 0px;
+	border-color: #DFF0D8;
+	opacity:100;
+
+
+}
+tbody tr:nth-child(odd){
+	background-color:#DDEBF6;
+}
+tbody tr:nth-child(even){
+	background-color:#F5F5F5;
+}
+.color_th{
+	background-color: #DFDFDF;
+	color:black;
+}
+.invisible_tb_data{
+	display: none;
+}
+
+.remove{
+	text-align: center;
+}
+
+.temp{
+	position: absolute;
+	height: 5px;
+
+}
+.button_new{
+	width:50%;
+}
+.bolding{
+	font-weight: bold;
+}
+.zero{
+	width: 0%;
+	display: none;
+}
+.fifty{
+	width: 50%;
+	display: none;
+}
+
+.hundred{
+	width: 100%;
+	display: none;
+}
+
+.button_remove{
+	width: 50%;
+}
+.button_update{
+	width: 50%;
+}
+.button_insert_serverappmaster{
+	width: 50%;
+}
+.button_delete_serverappmaster{
+	width: 50%;
+}
+.button_update_serverappmaster{
+	width: 50%;
+}
+.button_insert_serverappgroupmaster{
+	width: 50%;
+}
+.button_delete_serverappgroupmaster{
+	width: 50%;
+}
+.button_update_serverappgroupmaster{
+	width: 50%;
+}
+.button_change_circle{
+	width: 50%;
+}
+.space_master{
+	min-height: 20px;
+}
+
+.hideme{
+	display: none;
+}
+
+.showme{
+	display: block;
+}
+
+.tr_select:active{
+background-color: black;
+}
+.input-group-addon{
+	background-color: #DFF0D8;
+	color: #196CC3;
+	border-radius: 10px;
+}
+.boldme{
+	font-weight: bolder;
+}
+input{
+	width: 50%;
+}
+.clicked_apprentice{
+	background:green;
+	color:blue;
+}
+
+
+</style>
+
+</head>
+<body ondblclick>
+
+<div class="container_fluid">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+
+<h1><center><span style="color:rgb(25, 108, 191)"> <h1 style="color:white;"><span class="background_white"> Server Master</span></h1></span></center></h1>
+
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2  ">
+
+<button class="btn btn-primary logout tempme" style="position:absolute;right:0px;">
+<p>Log Out</p>
+</button>
+
+
+<button class="btn btn-primary hidethis_click tempme" style="position:absolute;right:26%;">
+<p>Hide All Form</p>
+</button>
+</div>
+
+<!-- main -->
+<div class="container-fluid" >
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 masterserver_heading">
+
+<div class="space_master container-fluid col-xs-12 col-sm-12 col-md-12 col-xl-12 ">
+
+</div>
+
+
+
+
+</div>
+
+
+
+<div clas="container-fluid">
+{%if permission==1%}
+<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">
+<button class="btn btn-default button_new" >
+
+<div class="bolding">Add</div>
+</button>
+
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">
+<button class="btn btn-default button_remove" >
+<div class="bolding">Delete</div>
+</button>
+
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">
+<button class="btn btn-default button_update" >
+<div class="bolding">Update</div>
+</button>
+
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">
+<button class="btn btn-default button_change_circle" >
+<div class="bolding">Change Circle</div>
+</button>
+
+</div>
+
+</div>
+{%endif%}
+<div class="space_master container-fluid col-xs-12 col-sm-12 col-md-12 col-xl-12 ">
+
+</div>
+
+<div class="container-fluid">
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme deleteme" method="POST" action="../deleter_servermaster">
+<div class="col-xs-4 col-md-4 col-sm-4 col-xl-4">
+</div>
+<div class="col-xs-8 col-md-8 col-sm-8 col-xl-8">
+<div class="form-group">
+<div >
+<input type="text" class="form-control ip_deleter" id="IP" name="IP" placeholder="IP" value="" required="True" readonly="True">
+
+</div>
+</div>
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="container-fluid">
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme updatecircle right_shift" method="POST" action="../update_circle">
+
+<div class="form-group">
+
+<div >
+<input type="text" class="form-control ip_deleter" id="IP" name="IP" placeholder="IP" required="True" readonly="True">
+
+</div>
+</div>
+
+<div class="form-group">
+
+<div >
+<select name="circle_name" class="circle_name_mainserver form-control" required="True" value="">
+{%for i in circle_name%}
+<option class={{i}}>{{i}}</option>
+
+{%endfor%}
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="container-fluid">
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<div class="updater_me">
+
+<form class="form-inline hideme updater ip_clicker_form_group " method="POST" action="../update_servermaster">
+<div class=" col">
+<div class="form-group">
+
+<div class="input-group " >
+<div class="input-group-addon">Old IP</div>
+<input type="text" class="form-control ip_deleter" id="old_ip" name="old_ip" placeholder="old ip" required="True" readonly="True">
+ 
+</div>
+</div>
+&nbsp;
+<div class="form-group ">
+<div class="input-group" >
+
+ <div class="input-group-addon ">New IP</div>
+
+<input type="text" class="form-control ip_deleter ip_checker" id="IP" name="IP" placeholder="enter new IP " required="True">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group ">
+<div class="input-group">
+<div class="input-group-addon">Number of E1</div>
+<input type="number" class="form-control e1count" id="e1" name="e1" placeholder="e1 count" required="True" min="0" max="100">
+
+</div>
+</div>
+<div class="form-group ">
+
+<div class="endDate input-group">
+<div class="input-group-addon">End Date</div>
+<input type="text" class="form-control date_picker date_picker_master_element1" id="endDate" name="endDate" placeholder="endDate dd/mm/yyyy" required="True" value="31/12/9999" >
+<script type="text/javascript">
+	
+</script>
+</div>
+</div>
+&nbsp;
+<div class="form-group ">
+<div class="input-group">
+<div class="input-group-addon">Buisness Start Hour</div>
+
+<select class="form-control Business_st_hr start1_hour_trigger" name="buisnessstarthour" >
+<script>
+$(".removeplus").remove();
+for (i=0;i<24;i++){
+		document.write("<option>"+String(i)+"</option>");
+	}
+</script>
+</select>
+
+</div>
+</div>
+&nbsp;
+<div class="form-group ">
+<div class="input-group">
+<div class="input-group-addon">Buisness End Hour</div>
+<select class="start_append_me1 form-control"  name="buisnessendhour">
+
+</select>
+</div>
+</div>
+&nbsp;
+<div class="form-group ">
+<div class="input-group">
+<div class="input-group-addon">IsActive</div>
+<input type="number" class="form-control IsActive" id="IsActive" name="IsActive" placeholder="IsActive" required="True" min="0" max="1">
+
+
+</div>
+</div>
+&nbsp;
+
+
+
+
+<div class="form-group">
+<div class="">
+<input type="submit" class="form-control btn-primary submit" id="" name="Submit" value="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+
+</div>
+</form>
+<form class="form-inline hideme master ip_clicker_form_group" method="POST" action="../inserter_servermaster">
+<div class="form-group">
+
+<div class="input-group">
+<div class="input-group-addon">Circle Name</div>
+<select name="circle_name" class="input_ip_no_effect form-control" required="True">
+{%for i in circle_name%}
+<option>{{i}}</option>
+
+{%endfor%}
+</select>
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div class="input-group">
+
+<div class="input-group-addon">IP</div>
+
+<input type="text" class="form-control ip_checker" id="IP" name="IP" placeholder="IP" required="True">
+
+</div>
+</div>
+<div class="form-group">
+
+<div class="input-group">
+<div class="input-group-addon">Number of E1</div>
+<input type="number" class="form-control e1counter" id="e1count" name="e1count" placeholder="e1count" required="True" value="" min="0"  max="100">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Buisness Start Hour</div>
+<select class="form-control start_hour_trigger" name="Business_st_hr">
+<script>
+	for (i=0;i<24;i++){
+		document.write("<option>"+String(i)+"</option>");
+	}
+</script>
+</select>
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+
+<div class="input-group">
+<div class="input-group-addon">Buisness End Hour</div>
+<select class="start_append_me form-control"  name="Business_ed_hr" >
+<script type="text/javascript">
+for (i=0;i<24;i++){
+	document.write("<option class='removeplus'>" +String(i)+"</option>");
+}
+</script>
+</select>
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">IsActive</div>
+
+<select class="form-control" name="IsActive">
+<option>0</option>
+<option>1</option>
+</select>
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+
+<div class="endDate input-group">
+<div class="input-group-addon">End Date</div>
+<input type="text" class="form-control date_picker date_picker_master_element2" id="endDate " name="endDate" placeholder="endDate dd/mm/yyyy" required="True" value="31/12/9999">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group " style="display:none;">
+<div class="input-group">
+<div class="input-group-addon">IsShared</div>
+<input type="number" class="form-control invisible_tb_data" id="IsShared" name="IsShared" placeholder="isshared"  min="0" max="1" value="1">
+
+</div>
+</div>
+&nbsp;
+&nbsp;
+<div class="form-group">
+<div class="">
+<input type="submit" class="form-control btn-primary submit" id="" name="Submit" value="submit" >
+
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 masterserver_headername">
+<table class="table  table-hover gohan">
+<thead class="saiyan_table1">
+	<tr class="  " style="color:rgb(25, 108, 191);;background:#DDEBF6;z-index:-1;">
+	<th>
+	Circle Name
+	</th>
+	<th  class=" invisible_tb_data ">
+	Circle Code
+	</th>
+	<th>
+	IP
+	</th>
+	<th>
+	Number of E1
+	</th>
+	<th>
+	IsActive
+	</th>
+	<th>
+	Start Date
+	</th>
+	<th>
+	End Date
+	</th>
+	<th class="invisible_tb_data">
+	Update Date Time
+	</th>
+	<th>
+	Business Start Hour
+	</th>
+	<th>
+	Business End Hour
+	</th>
+
+	</tr>
+	</thead>
+	</table>
+</div>
+<!--adder goee here-->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 masterserver">
+<div style="overflow:auto;height:30%;">
+<table class="table  table-hover gohan">
+	
+	<tbody class="saiyan_table " >
+	{% for master_tuple in result_sql %}
+	<tr class=" tr_select color_th" style="blue;" >
+	{% for inner_tuple in master_tuple %}
+	
+	<th class="{{class_server_master[loop.index-1]}}">{{inner_tuple}}</th>
+	
+	{% endfor %}
+	</tr>
+	{% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 container-fluid serverappmasters">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container serverappmasters_child_heading">
+<header >
+<h2><center><span class="glyphicon  " aria-hidden="true"></span><span style="color:rgb(25, 108, 191)"><span class="background_white">  Server App Master</span></span></center></h2>
+</header>
+
+</div>
+<div class="container-fluid">
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+{% if permission==1 %}
+<button class="btn btn-default button_insert_serverappmaster" >
+<div class="bolding">Add</div>
+</button>
+
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+<button class="btn btn-default button_update_serverappmaster" >
+<div class="bolding">Update</div>
+</button>
+
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+<button class="btn btn-default button_delete_serverappmaster" >
+<div class="bolding">Delete</div>
+</button>
+{% endif %}
+
+</div>
+
+</div>
+
+<div class="space_master container-fluid col-xs-12 col-sm-12 col-md-12 col-xl-12 ">
+
+</div>
+<div class="container-fluid">
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme deleteme_serverappmaster" method="POST" action="../delete_appserver">
+
+<div class="">
+<div class="form-group invisible-tb-data" style="display:none;">
+<div  class="input-group">
+<div class="input-group-addon">Master Server ID</div>
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Appname</div>
+<input type="text" class="form-control old_app_name" id="appname" name="appname" placeholder="app name" required="True" value="" readonly="readonly">
+
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Appgroup</div>
+
+<input type="text" name="appgroup_alter" class=" form-control add_app_group appgroup appgroup_alter " readonly="True" required="True" value="">
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme insertme_serverappmaster" method="POST" action="../insert_appserver">
+
+<div class="">
+<div class="form-group invisible-tb-data" style="display:none;">
+<div class="input-group">
+<div class="input-group-addon">MasterServerID</div>
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Appname</div>
+<input type="text" class="form-control" id="appname" name="appname" placeholder="app name" required="True">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Appgroup</div>
+<select name="appgroup" class="appgroup form-control">
+{%for i in result_app_group_name %}
+<option class="{{i[0]}}">{{i[0]}}</option>
+{%endfor%}
+</select>
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme updateme_serverappmaster" method="POST" action="../update_appserver">
+
+<div class="">
+<div class="form-group invisible-tb-data" style="display:none;">
+<div class="input-group" >
+<div class="input-group-addon">MasterServerID </div>
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Old Appname</div>
+<input type="text" class="form-control old_app_name" id="appname" name="oldappname" placeholder=" old app name" required="True"  value="" readonly="True">
+
+</div>
+</div>
+&nbsp;
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Old Appgroup</div>
+<input type="text" name="appgroup_alter" class=" form-control add_app_group appgroup appgroup_alter " readonly="True" required="True" value="">
+
+</div>
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">New Appname</div>
+<input type="text" class="form-control new_app_name" id="appname" name="appname" placeholder="app name" required="True">
+
+</div>
+</div>
+
+&nbsp;
+
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container serverappmasters_child_table_heading">
+<table class="table  table-hover gohan">
+<thead class="saiyan_table1">
+	<tr class="  " style="color:rgb(25, 108, 191);background:#DFF0D8;">
+	<th>
+	Application name
+	</th>
+	<th>
+	AppGroup name
+	</th>
+	
+	
+
+	</tr>
+	</thead>
+	</table>
+
+</div>
+
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container">
+
+<div style="overflow:auto;height:25%;" class="serverappmaster_main">
+<table class="table table-bordered table-hover gohan">
+<!-- dom manipulation -->
+
+
+<tbody class=" serverappmaster ">
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 container-fluid serverappmasters">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container serverappmasters_child_heading">
+<header >
+<h2><center><span class="glyphicon  " aria-hidden="true"></span><span style="color:rgb(25, 108, 191)"><span class="background_white">  Server App Group Master</span></center></h2>
+</header>
+
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container serverappmasters_child_table_heading">
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+{%if permission==1 %}
+<button class="btn btn-default button_insert_serverappgroupmaster" >
+<div class="bolding">Add</div>
+</button>
+
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+<button class="btn btn-default button_update_serverappgroupmaster" >
+<div class="bolding">Update</div>
+</button>
+
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
+<button class="btn btn-default button_delete_serverappgroupmaster" >
+<div class="bolding">Delete</div>
+</button>
+{% endif %}
+</div>
+<div class="space_master container-fluid col-xs-12 col-sm-12 col-md-12 col-xl-12 ">
+
+</div>
+<div class="container-fluid">
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme delete_serverappgroupmaster " method="POST" action="../delete_appgroupserver">
+
+
+<div class="form-group invisible-tb-data" style="display:none;">
+<div class="input-group">
+<div class="input-group-addon">MasterServerID</div>
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+
+
+
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Appgroup</div>
+
+<input type="text" class="form-control appgroup_alter" id="appgroup_alter" name="appgroup_new"  required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+
+
+
+
+
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+</form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme update_serverappgroupmaster" method="POST" action="../update_appgroupserver">
+
+
+<div class="form-group invisible-tb-data" style="display:none;">
+<div class="input-group">
+<div class="input-group-addon">MasterServerID</div>
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Old Appgroup</div>
+<select name="oldappgroup" class="appgroup_new special form-control">
+{%for i in result_app_group_name %}
+<option class="{{result_app_group_name_alter[loop.index-1]}}">{{i[0]}}</option>
+{%endfor%}
+</select>
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">New Appgroup</div>
+<select name="appgroup" class="appgroup_new form-control">
+{%for i in result_app_group_name %}
+<option class="{{result_app_group_name_alter[loop.index-1]}}">{{i[0]}}</option>
+{%endfor%}
+</select>
+
+</div>
+</div>
+&nbsp;
+
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">Number of E1</div>
+<input type="number" class="form-control numofe1_new" id="e1count" name="e1count" placeholder="enter e1 count" required="True"  value="" min="0"  max="100">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group " style="display:none;">
+<div class="input-group">
+<div class="input-group-addon">IsShared</div>
+<input type="number" class="form-control isshared_new date_picker invisible_tb_data" id="isshared" name="isshared" placeholder="is shared"   value="1" min="0" max="1" value="1">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">IsActive</div>
+
+<select class="form-control " name="isactive" id="isactive" >
+<option >0</option>
+<option selected="selected">1</option>
+</select>
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+
+<div class="input-group">
+<div class="input-group-addon">End Date</div>
+<input type="text" class="form-control date_picker date_picker_master_element3 enddate_new" id="endDate" name="endDate" placeholder="endDate dd/mm/yyyy" required="True" value="31/12/9999">
+
+</div>
+</div>
+&nbsp;
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+&nbsp;
+</form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-xl-12">
+<form class="form-inline hideme insert_serverappgroupmaster" method="POST" action="../insert_appgroupserver">
+
+
+<div class="form-group invisible-tb-data" style="display:none;">
+<div >
+<input type="number" class="form-control addmetofield" id="masterserverid" name="masterserverid" placeholder="masterserverid" required="True" readonly="readonly" value="">
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<div >
+<div class="form-group">
+<div class="input-group " >
+<div class="input-group-addon">Appgroup</div>
+<select name="appgroup" class="form-control">
+
+{%for i in result_app_group_name %}
+<option >{{i[0]}}</option>
+{%endfor%}
+</select>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="form-group">
+<div class="input-group " >
+<div class="input-group-addon">Number of E1</div>
+<input type="number" class="form-control " id="e1count" name="e1count" placeholder="enter e1 count" required="True"  value="" min="0"  max="100">
+
+</div>
+</div>
+<div class="form-group " style="display:none;">
+<div class="input-group " >
+<div class="input-group-addon">is shared</div>
+<input type="number" class="form-control invisible_tb_data date_picker" id="isshared" name="isshared" placeholder="is shared"    min="0" max="1" value="1">
+
+</div>
+</div>
+<div class="form-group">
+<div class="input-group">
+<div class="input-group-addon">IsActive</div>
+
+<select class="form-control " name="isactive">
+<option>0</option>
+<option>1</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+
+<div class="input-group">
+<div class="input-group-addon">End Date</div>
+<input type="text" class="form-control date_picker date_picker_master_element4" id="endDate" name="endDate" placeholder="endDate dd/mm/yyyy" required="True" value="31/12/9999">
+
+</div>
+</div>
+
+<div class="form-group">
+<div >
+<input type="submit" class="form-control btn-primary submit" value="submit" name="submit"  >
+
+</div>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+
+<table class="table table-bordered table-hover gohan">
+<thead class="saiyan_table1">
+	<tr class=" success " style="color:rgb(25, 108, 191);bgcolor:black;">
+	<th>
+	Application Group
+	</th>
+	
+	<th>
+	Number Of E1
+	</th>
+	<th>
+	isShared
+	</th>
+	<th>
+	Start Date
+	</th>
+	<th>
+	End Date
+	</th>
+
+
+
+	
+	
+
+	</tr>
+	</thead>
+	</table>
+
+
+
+
+
+
+
+<div style="overflow:auto;height:33%;" class="serverappgroupmaster_main">
+<table class="table table-bordered table-hover gohan">
+<!-- dom manipulation -->
+
+<tbody class=" serverappgroupmaster ">
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</div>
+<script type="text/javascript">
+
+var progress_checker=0;
+var x="";
+var loader1=0;
+var loader2=0;
+var a=function(data){
+	
+	//this server server app master,the left table in the end
+	result_server_app_master=data["appname"];
+	progress_checker=progress_checker+1;
+	$(".progress-bar").addClass("fifty");
+	$(".progress-bar").addClass("active");
+	for (var i in result_server_app_master){
+	$(".serverappmaster").append("<tr class='remove  clickerserverappmaster' ><div class='scrollme'><th class='appname'>"+result_server_app_master[i][0]+"</th></div><th class='group'>"+result_server_app_master[i][1]+"</th></tr>");	
+	}
+	loader1=0;
+	
+}
+
+var b=function(data){
+	result_server_app_master_alter=data["data"];
+	progress_checker=progress_checker+1;
+	$(".progress-bar").addClass("hundred");
+	$(".progress-bar").removeClass("active");
+	for (var i in result_server_app_master_alter){
+		var query="<tr class='remove  clickerserverappgroupmaster'><th class='appgroup'>"+result_server_app_master_alter[i][0]+"</th><th class='numofe1'>"+result_server_app_master_alter[i][1]+"</th><th class='isshared'>"+result_server_app_master_alter[i][2]+"</th><th class='startdate'>"+result_server_app_master_alter[i][3]+"</th><th class='enddate'>"+result_server_app_master_alter[i][4]+"</th></tr>";
+		
+		$(".serverappgroupmaster").append(query);
+		
+		
+		
+	}
+}
+
+$(document).ready(
+
+function(){
+	
+	
+	compare_start_end1=function(start){
+	temp_me=[];
+	for (i=start;i<24;i++){
+		temp_me.push(i);
+		$(".start_append_me1").append("<option class='removeplus tempmenow"+String(i)+"'>"+String(i)+"</option>");
+	}
+	
+}
+
+	
+	
+	$(".button_new").click(function(){
+	$("form").addClass("hideme");
+	$(".master").toggleClass("hideme");
+
+	}
+	);
+	$(".button_remove").click(function(){
+	$("form").addClass("hideme");
+	$(".deleteme").toggleClass("hideme");	
+	}
+	);
+		$(".button_update").click(function(){
+		$("form").addClass("hideme");
+	$(".updater").toggleClass("hideme");	
+	}
+	);
+			$(".button_change_circle").click(function(){
+				$("form").addClass("hideme");
+	$(".updatecircle").toggleClass("hideme");	
+	}
+	);
+	$(".button_update_serverappmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".updateme_serverappmaster").toggleClass("hideme");	
+	}
+	);
+	$(".button_insert_serverappmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".insertme_serverappmaster").toggleClass("hideme");	
+	}
+	);
+	$(".button_delete_serverappmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".deleteme_serverappmaster").toggleClass("hideme");	
+	}
+	);
+	$(".button_update_serverappgroupmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".update_serverappgroupmaster").toggleClass("hideme");	
+	}
+	);
+	$(".button_insert_serverappgroupmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".insert_serverappgroupmaster").toggleClass("hideme");	
+	}
+	);
+	$(".button_delete_serverappgroupmaster").click(function(){
+		$("form").addClass("hideme");
+	$(".delete_serverappgroupmaster").toggleClass("hideme");	
+	}
+	);
+
+	hidethis=function(){
+		$("form").addClass("hideme");
+	}
+	
+$(".hideall").click(
+	function(){
+		
+		$("form").addClass("hideme");
+	}
+	);
+	
+	
+	$(".logout").click(function(){
+		window.location.href="/index/logout";}
+		);
+	$(".tr_select").click(
+	function(){
+		
+	$(".serverappmasters input").not(".submit").not('.date_picker').prop("value","");
+	$(".serverappmasters input").not(".submit").not('.date_picker').prop("value","");
+	if (1){
+		if ($(this).children(".IsActive").html()==0){
+			alert("Current server is Not Active");
+		}
+	if (progress_checker%2!=0){
+		return 0;
+	}
+	$(".removeplus").remove();
+	$(".remove").remove();
+	$(".progress-bar").removeClass("fifty");
+	$(".progress-bar").removeClass("hundred");
+	$(".progress-bar").addClass("zero");
+	$(".clicked_apprentice").removeClass("clicked_apprentice");
+	$(this).addClass("clicked_apprentice");
+	x=$(this).children(".invisible_tb_data").html();
+	y=$(this).children(".IP").html();
+	masterserver=$(this).children(".mainserver").html();
+	circle_name=$(this).children(".circle_name").html();
+	startdate=$(this).children(".startDate").html();
+	NumOfE1=$(this).children(".NumOfE1").html();
+	IsActive=$(this).children(".IsActive").html();
+	Business_st_hr=$(this).children(".Business_st_hr").html();
+	Business_ed_hr=$(this).children(".Business_ed_hr").html();
+	enddate=$(this).children(".endDate").html();
+	enddate_temp=[]
+	enddate_temp=enddate.split('-');
+	enddate=enddate_temp[2]+"/"+enddate_temp[1]+"/"+enddate_temp[0];
+
+	$(" option").removeProp("selected");
+	$(".circle_name_mainserver ."+circle_name).prop("selected","selected");
+	$(".ip_deleter").prop("value",y);
+	$(".e1count").prop("value",NumOfE1);
+	$(".Business_st_hr").prop("value",Business_st_hr);
+	$(".Business_ed_hr").prop("value",Business_ed_hr);
+	$(".IsActive").prop("value",IsActive);
+	$(".addmetofield").prop("value",x);
+	$(".appgroupnameadder").prop("value","");
+	$(".date_picker_master_element1").prop("value",enddate);
+	compare_start_end1(Business_st_hr);
+		$(".start_append_me1 .tempmenow"+String(Business_ed_hr)).removeProp("selected","selected");
+	$(".start_append_me1 .tempmenow"+String(Business_ed_hr)).prop("selected","selected");
+
+	for (i=0;i<Business_st_hr;i++){
+		$(".tempmenow"+String(i)).remove(".tempmenow"+String(i));
+	}
+	$.getJSON("{{dbname}}"+"/"+x,a);
+	$.getJSON("{{dbname}}"+"/"+x+"/serverappgroup",b);}
+	else{
+		alert("Not active");
+		}
+	}
+	);
+
+	{%if case!=None %}
+	alert("{{case}}");
+	{%endif%}
+
+	var qaz=function(){
+		$(".special").removeProp("disabled");
+		old_app_name=$(this).children(".appname").html();	
+		add_app_group=$(this).children(".group").html();
+		$(".old_app_name").prop("value",old_app_name);
+		$(".new_app_name").prop("value",old_app_name);
+		$(".serverappmaster option").removeProp("selected");
+		class_new=("."+add_app_group).replace("/","");
+		class_new=class_new.replace("&","");
+		class_new=class_new.replace("amp;","");
+		class_new=class_new.replace(" ","");
+		class_new=class_new.replace("Delhi 121123 Comb","Delhi121123comb");
+		class_new=".appgroup "+class_new;
+		$(".serverappmaster .clicked_apprentice").removeClass("clicked_apprentice");
+		$(this).addClass("clicked_apprentice");
+		$(String(class_new)).prop("selected","selected");
+		$(".special").prop("disabled","disabled");
+		class_new_alter=add_app_group.replace(/&amp;/g, '&');
+		$(".appgroup_alter").prop("value",class_new_alter);
+		
+	}
+	var zaq=function(){
+		$(".special").removeProp("disabled");
+		appgroup=$(this).children(".appgroup").html();
+		numofe1=$(this).children(".numofe1").html();
+		isshared=$(this).children(".isshared").html();
+		startdate=$(this).children(".startdate").html();
+		enddate=$(this).children(".enddate").html();
+		$(".serverappgroupmaster .clicked_apprentice").removeClass("clicked_apprentice");
+		$(this).addClass("clicked_apprentice");		
+		enddate_temp=[]
+		enddate_temp=enddate.split('-');
+		enddate=enddate_temp[2]+"/"+enddate_temp[1]+"/"+enddate_temp[0];
+		$(".date_picker_master_element3").attr("value",enddate);
+		$(".numofe1_new").prop("value",numofe1);
+		$(".isshared_new").prop("value",isshared);
+		class_new_alter=appgroup.replace(/&amp;/g, '&');
+		class_new=("."+appgroup).replace("/","");
+		class_new=class_new.replace("&","");
+		class_new=class_new.replace(" amp; ","");
+		
+		$(".appgroup_alter").prop("value",class_new_alter);
+		class_new=class_new.replace("Delhi 121123 Comb","Delhi121123comb");
+		class_new=class_new.replace(" ","");
+		class_new=".appgroup_new "+class_new;
+		$(".serverappgroupmaster option").removeProp("selected");
+		$(String(class_new)).prop("selected","selected");
+		$(".special").prop("disabled","disabled");
+
+	}
+	$(".serverappmaster").on('click','.clickerserverappmaster',qaz);
+	$(".serverappgroupmaster").on('click','.clickerserverappgroupmaster',zaq);
+
+	normalizer=function(){
+		$(".special").removeProp("disabled");
+	}
+
+$(".updateme_serverappmaster").submit(normalizer);
+$(".update_serverappgroupmaster").submit(normalizer);
+$("button").addClass(".boldme");
+$('input').attr('placeholder','');
+$.ajaxSetup({ cache: false });
+flasher_val=0;
+
+$(".ip_checker").focusout(
+
+	function(){
+		musigma=0;
+ 		ip_checker=$(this).val();
+ 		ip_checker=ip_checker.split('.');
+ 		if (ip_checker.length!=4){
+ 			musigma=1;
+ 		}
+ 		for(i=0;i<4;i++){
+ 			temp_inside=parseInt(ip_checker[i]);
+ 			if (isNaN(temp_inside)){
+ 				musigma=1;
+ 				break;
+ 			}
+ 			else if (temp_inside<0 || temp_inside >255 ){
+ 				musigma=1;
+ 				break;
+ 			}
+ 		}
+ 		if ( musigma==0){
+ 			flasher_val=0;
+ 			$(".error_displayer").html("");
+ 			disable_submit();
+ 		}
+ 		else{
+ 			flasher_val=1;
+ 			alert("Your IP format is wrong");
+ 			disable_submit();
+ 		}
+	}
+
+	);
+
+
+ 
+ var tagger=function(){
+ 	if (flasher_val==1){
+ 		alert(1);
+
+ 	}
+
+ }
+
+
+
+
+disable_submit=function(){
+	if (flasher_val==1){
+		$(".ip_clicker_form_group .submit").prop("disabled","disabled");
+	}
+	else{
+		$(".ip_clicker_form_group .submit").removeAttr("disabled");
+	}
+}
+
+$("button").click(
+	function(){
+		flasher_val=0;
+		disable_submit();
+		$(".error_displayer").html("");
+
+	}
+	);
+
+compare_start_end=function(start){
+	temp_me=[];
+	for (i=start;i<24;i++){
+		temp_me.push(i);
+		$(".start_append_me").append("<option class='removeplus '>"+String(i)+"</option>");
+	}
+	
+}
+
+
+$(".start_hour_trigger").focusout(
+	function(){
+		$(".removeplus").remove();
+		compare_start_end($(this).val());
+	}
+);
+$(".start1_hour_trigger").focusout(
+	function(){
+		$(".removeplus").remove();
+		compare_start_end1($(this).val());
+	}
+);
+
+
+date_error_checker=function(current_date){
+	musigma_1=0;
+	date_temp=new Date();
+	day=[];
+	day[0]=date_temp.getDate();
+	day[1]=date_temp.getMonth()+1;
+	day[2]=date_temp.getFullYear(); 
+	current_date1=current_date.split('/');
+	if (current_date1.length!=3){
+		musigma_1=1;
+	}
+	if (musigma_1==1){
+		return -1;
+	}
+	var reg = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
+	var beast=new RegExp(reg);
+	if (!beast.test(current_date)){
+		return -1;
+	}
+	for(i=2;i>-1;i--){
+		if (parseInt(day[i])>parseInt(current_date1[i])){
+			musigma_1=1;
+			return -2;
+		}
+		else if(parseInt(day[i])<parseInt(current_date1[i])){
+			break;
+		}
+		else{
+			continue;
+		}
+	}
+
+	return 0;
+
+}
+
+
+
+
+$(".date_picker_master_element1").focusout(
+function()
+	{
+		
+		var current_date_temp=$(this).val();
+		var xamper=date_error_checker(current_date_temp);
+		if ( xamper==-1 ){
+			alert("You have a problem with date fomat.Format is dd/mm/yyyy");
+			$(".date_picker_master_element1").prop("value","");
+			
+		}
+		else if (xamper==-2 ){
+			alert("Your Date should be greater than or equal to current date");
+			$(".date_picker_master_element1").prop("value","");
+			
+		}
+		
+
+		
+	}
+
+	);
+$(".date_picker_master_element2").focusout(
+function()
+	{
+		
+		var current_date_temp=$(this).val();
+		var xamper=date_error_checker(current_date_temp);
+		if ( xamper==-1 ){
+			alert("You have a problem with date fomat.Format is dd/mm/yyyy");
+			$(".date_picker_master_element2").prop("value","");
+			
+		}
+		else if (xamper==-2 ){
+			alert("Your Date should be greater than or equal to current date");
+			$(".date_picker_master_element2").prop("value","");
+			
+		}
+		
+
+		
+	}
+
+	);
+
+$(".date_picker_master_element3").focusout(
+function()
+	{
+		
+		var current_date_temp=$(this).val();
+		var xamper=date_error_checker(current_date_temp);
+		if ( xamper==-1 ){
+			alert("You have a problem with date fomat.Format is dd/mm/yyyy");
+			$(".date_picker_master_element3").prop("value","");
+			
+		}
+		else if (xamper==-2 ){
+			alert("Your Date should be greater than or equal to current date");
+			$(".date_picker_master_element3").prop("value","");
+			
+		}
+		
+
+		
+	}
+
+	);
+
+$(".date_picker_master_element4").focusout(
+function()
+	{
+		
+		var current_date_temp=$(this).val();
+		var xamper=date_error_checker(current_date_temp);
+		if ( xamper==-1 ){
+			alert("You have a problem with date fomat.Format is dd/mm/yyyy");
+			$(".date_picker_master_element4").prop("value","");
+			
+		}
+		else if (xamper==-2 ){
+			alert("Your Date should be greater than or equal to current date");
+			$(".date_picker_master_element4").prop("value","");
+			
+		}
+		
+
+		
+	}
+
+	);
+
+
+$(".hidethis_click").click(
+function(){
+$("form").addClass("hideme");
+
+
+}
+
+	)
+
+$(".saiyan_table .tr_select:first-child").trigger("click");
+}
+
+
+);
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
