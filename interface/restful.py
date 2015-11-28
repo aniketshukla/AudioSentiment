@@ -42,8 +42,8 @@ def getSent():
 	name=str(random.randint(1,200000))
 	path=name+voice.filename
 	voice.save(name+voice.filename)
-
 	y,sr=librosa.load(path)
+	os.remove(path)
 	print('y sr computed')
 	mfcc=librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13)
 	mfcc=np.array(map(mapper,mfcc))
