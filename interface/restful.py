@@ -12,6 +12,7 @@ import numpy as np
 with warnings.catch_warnings():
     warnings.warn("ignore")
 import random
+from pydub import AudioSegment
 
 
 
@@ -39,11 +40,15 @@ def adder():
 @app.route('/sent',methods=['POST'])
 def getSent():
 	voice=request.files['file']
+	format_audio=request.form['audio_format']
 	name=str(random.randint(1,200000))
 	path=name+voice.filename
 	voice.save(name+voice.filename)
-	y,sr=librosa.load(path)
+	temp=exec("AudioSegment.from_"+str(format_audio)+"("+path+")")
+	temp.export("path"+str(1),format="mp3",bitrate="64k")
+	y,sr=librosa.load(path+str(1))
 	os.remove(path)
+	os.remove(path+str(1))
 	print('y sr computed')
 	mfcc=librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13)
 	mfcc=np.array(map(mapper,mfcc))
@@ -57,9 +62,9 @@ def getSent():
 			max_index=foo
 			max_value=fnn[foo]
 	if max_index==0:
-		return 'Happy'
+		return "{emotion:Happy}"
 	elif max_index==1:
-		return Angry
+		return "{emotion:Angry}"
 
 
 
