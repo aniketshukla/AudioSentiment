@@ -1,8 +1,39 @@
 <html>
-<body>
-<form action="/sent" method="POST" enctype="multipart/form-data" >
-<input type="file" name="file" allow="audio/*" >
-<input type="submit">
+<head>
+
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css"/>
+<script src="../static/bootstrap-3.3.5-dist/js/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-3.3.5-dist/css/bootstrap.min.css') }}"/>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-3.3.5-dist/css/bootstrap-theme.min.css') }}"/>
+
+<script src="{{ url_for('static', filename='bootstrap-3.3.5-dist/js/jquery-1.11.3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='jqueryui/jquery-ui.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jqueryui/jquery-ui.min.css') }}"/>
+<form method="post" action="/sent" enctype="multipart/form-data">
+<input type="file" name="file" accept="audio/*" placeholder="upload file">
+<input type="text" name="audio_format" class="format" placeholder="add file format">
+<input type="submit" value="getSentiment">
 </form>
+</head>
+<script>
+$(document).ready(
+	function(){
+		$(".format").focusout(
+			function(){
+				alert("running focusout");
+				var abcd=$(".format").val();
+				if (abcd=="mp3" || abcd=="mp4"){
+					alert("application does not support mp3 and mp4 format files")
+				}
+			}
+			)
+	}
+	)
+</script>
+<body>
+	
 </body>
 </html>

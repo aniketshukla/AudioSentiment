@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,session,g,redirect,url_for
+from flask import Flask,render_template,request,session,g,redirect,url_for,send_from_directory
 from flask import abort,render_template,flash,make_response 
 from flask_restful import Resource,Api
 import os
@@ -13,6 +13,8 @@ with warnings.catch_warnings():
     warnings.warn("ignore")
 import random
 from pydub import AudioSegment
+from werkzeug import secure_filename
+UPLOAD_PATH=os.getcwd()+"/static/music_repository"
 
 
 
@@ -23,6 +25,7 @@ PASSWORD='root'
 FNN_PATH='../train.xml'
 app=Flask(__name__)
 api=Api(app)
+app.config['UPLOAD_FOLDER']=UPLOAD_PATH
 app.debug=True
 FNN_PATH='../train.xml'
 
@@ -32,23 +35,29 @@ def mapper(mfcc):
 
 @app.route('/')
 def adder():
-	return render_template('booga.html')
+	return render_template('panel.html')
 
 
 
 
 @app.route('/sent',methods=['POST'])
 def getSent():
+	if request.method!='POST':
+		return '{emotion:invalid request method submit a post request}'
 	voice=request.files['file']
+	filename=secure_filename(voice.filename)	
 	format_audio=request.form['audio_format']
-	name=str(random.randint(1,200000))
-	path=name+voice.filename
-	voice.save(name+voice.filename)
-	temp=exec("AudioSegment.from_"+str(format_audio)+"("+path+")")
-	temp.export("path"+str(1),format="mp3",bitrate="64k")
-	y,sr=librosa.load(path+str(1))
+	path=os.path.join(app.config['UPLOAD_FOLDER'],filename)
+	voice.save(path)
+	temp="AudioSegment.from_"+str(format_audio)+"('"+path+"')"
+	temp=eval(temp)
 	os.remove(path)
-	os.remove(path+str(1))
+	temp.export(path,format="mp3",bitrate="64k")
+	try:
+		y,sr=librosa.load(path)
+	except:
+		return "{emotion:error}"
+	os.remove(path)	
 	print('y sr computed')
 	mfcc=librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13)
 	mfcc=np.array(map(mapper,mfcc))
@@ -68,7 +77,9 @@ def getSent():
 
 
 
-
+@app.route('/getXML')
+def givemeXML():
+	return send_from_directory('../','train.xml',as_attachment=True)
 
 
 
