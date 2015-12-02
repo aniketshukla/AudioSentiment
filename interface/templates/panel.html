@@ -12,28 +12,221 @@
 <script src="{{ url_for('static', filename='bootstrap-3.3.5-dist/js/jquery-1.11.3.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jqueryui/jquery-ui.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jqueryui/jquery-ui.min.css') }}"/>
-<form method="post" action="/sent" enctype="multipart/form-data">
-<input type="file" name="file" accept="audio/*" placeholder="upload file">
-<input type="text" name="audio_format" class="format" placeholder="add file format">
-<input type="submit" value="getSentiment">
-</form>
-</head>
-<script>
-$(document).ready(
-	function(){
-		$(".format").focusout(
-			function(){
-				alert("running focusout");
-				var abcd=$(".format").val();
-				if (abcd=="mp3" || abcd=="mp4"){
-					alert("application does not support mp3 and mp4 format files")
-				}
-			}
-			)
-	}
-	)
-</script>
-<body>
+<style type="text/css" media="screen">
+.xamper{
+	border-color: black;
+	border-width: 10px;
+	background-color: ;
+}
+.panel_header{
+background-color: black;
+opacity: 1;	
+}
+.panel1{
+padding: 4px;
+background-color:#D0C91F; 
+
+}
+.panel1:hover{
+background-color:#D0C91F; 
+opacity: 0.5;
+}
+.panel2:hover{
+background-color:#85C4B9;
+opacity: 0.5;
+}
+.panel2{
+	padding: 4px;
+background-color:#85C4B9;
+}
+.panel3:hover{
+opacity: 0.5;
+background-color:#008BBA; 
+}
+.panel3{
+	padding: 4px;
+background-color:#008BBA; 
+}
+.panel4:hover{
+opacity: 0.5;
+background-color:#DF514C; 
+}
+.panel4{
+	padding: 4px;
+background-color:#DF514C; 
+}
+.panel5:hover{
+opacity: 0.5;
+background-color:#DC403B;
+}
+.panel5{
+background-color:#DC403B;
+}
+.panel12{
+padding:10px;
+padding-left: 100px;
+padding-top: 20px;
+background-color:#D0C91F; 
+
+}
+.panel12:hover{
+background-color:#D0C91F; 
+opacity: 1;
+}
+.panel32:hover{
+opacity: 0.9;
+background-color:#008BBA; 
+}
+.panel32{
+padding:10px;
+padding-left: 100px;
+padding-top: 20px;
+background-color:#008BBA; 
+}
+.panel42:hover{
+opacity: 1;
+background-color:#DF514C; 
+}
+.panel42{
+	padding:10px;
+padding-left: 150px;
+padding-top: 20px;
+background-color:#DF514C; 
+}
+
+.pip1{ 
+    color:#DC403B; 
+   	
+}
+.pip2{ 
+    color:#DF514C; 
+   	
+}
+.pip3{ 
+    color:#D0C91F; 
+   	
+}
+.pip4{ 
+    color:#85C4B9; 
+   	
+}
+.pip5{ 
+    color:#D0C91F; 
+   	
+}
+.spacer{
+	height: 10%;
+}
+.spacer1{
+	height: 40%;
 	
+	border: black;
+	border-width: 4px;
+}		
+.padder{
+	border-color: green;
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
+input[type="text"] {
+   height: 50px;
+   font-size: 16px;
+   border-width: 2px;
+   border-color: black;
+   
+}
+input[type="file"] {
+   height: 50px;
+   font-size: 10px;
+   border-width: 2px;
+   padding: 0px;
+   border-color: black;
+   
+}
+input[type="submit"] {
+   height: 50px;
+   font-size: 10px;
+   border-width: 2px;
+   border-color: black;
+   background-color:#D0C91F ;
+   color:blue;
+   font-weight: bold;
+   width: 400px;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid ">
+<div class="row-md-4 row-sm-4 row-lg-4 panel_header">
+<div class="col-md-2 row-sm-4 row-lg-4">
+	
+</div>
+<div class="col-md-8 col-sm-8 col-lg-8 panel_header">
+<div class="col-md-3 panel1">
+<h1 class="pip1">S<span>entiment</span>
+</h1>
+</div>
+<div class="col-md-3 panel2">
+<h1 class="pip2">F<span>rom</span></h1>
+
+</div>
+<div class="col-md-3 panel3">
+<h1 class="pip3">A<span>udio</span></h1>
+
+</div>
+<div class="col-md-3 panel4">
+<h1 class="pip4">F<span>eeds</span></h1>
+</div>
+
+
+
+</div>
+<div class="col-md-2 col-sm-2 col-lg-2 ">
+</div>
+</div>
+
+</div>
+<div class="row-md-4 row-sm-4 row-lg-4 spacer">
+</div>
+<div class="container-fluid padder">
+<div class="row-md-12 row-sm-12 row-lg-12 spacer1 " >
+<div class="row-md-12 spacer1">
+<h3 style="color:white">Add any audio file,any format other than mp3 or mp4 would work and get the sentiment of the file</h3>
+</div> 
+<form class="form-inline" action="/sent" method="post" enctype="multipart/form-data">
+
+<div class="form-group col-md-4 spacer1 panel12">
+<input type="file" class="spacer3 form-control" name="file" accept="audio/*" required>
+</div>
+
+<div class="form-group col-md-4 spacer1 panel32" >
+<input type="text"  class="spacer3 form-control format" name="format" placeholder="Enter file format" required>
+</div>
+<div class="form-group col-md-4 spacer1 panel42">
+<input type="submit" class="spacer3 form-control" value="getSentiment" >
+</div>
+<div class="row-md-4 row-sm-4 row-lg-4 spacer1">
+</div>
+</div>
+</form>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(
+		function(){
+			$(".format").focusout(
+				function(){
+					if ($(".format").val()=='mp3' || $('.format').val()=='mp4' ){
+						alert('Mp3 and mp4 is not supported in this version..upload flv to get result');
+						$(".format").prop("value","");
+					}
+				}
+
+				)
+		}
+
+		)
+</script>
 </body>
 </html>
