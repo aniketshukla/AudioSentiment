@@ -42,6 +42,7 @@ def adder():
 
 @app.route('/sent',methods=['POST'])
 def getSent():
+	return 1
 	if request.method!='POST':
 		return '{emotion:invalid request method submit a post request}'
 	voice=request.files['file']

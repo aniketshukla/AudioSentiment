@@ -197,7 +197,7 @@ input[type="submit"] {
 <form class="form-inline" action="/sent" method="post" enctype="multipart/form-data">
 
 <div class="form-group col-md-4 spacer1 panel12">
-<input type="file" class="spacer3 form-control" name="file" accept="audio/*" required>
+<input type="file" class="spacer3 form-control file" name="file" accept="audio/*" required>
 </div>
 
 <div class="form-group col-md-4 spacer1 panel32" >
@@ -213,6 +213,7 @@ input[type="submit"] {
 </div>
 </div>
 <script type="text/javascript">
+
 	$(document).ready(
 		function(){
 			$(".format").focusout(
@@ -227,6 +228,32 @@ input[type="submit"] {
 		}
 
 		)
+	//using xhr2
+	var ajax_data;
+	$(document).ready(
+		function(){
+			if ( $('.file').change() || $('.format').change()){
+			var element=$(".file")[0].files[0];
+			var file_format=$(".format").val();
+			var formdata=new FormData();
+			formdata['file']=element;
+			formdata['format']=file_format;
+			ajax_data=$.ajax({
+				url:'/sent',
+				type:'POST',
+				contentType:false,
+				data:formdata,
+				cache:false,
+				processData:false
+			}
+				)
+			}
+		}
+
+
+
+		)
+
 </script>
 </body>
 </html>
