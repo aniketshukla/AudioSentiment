@@ -14,8 +14,9 @@ with warnings.catch_warnings():
 import random
 from pydub import AudioSegment
 from werkzeug import secure_filename
+import matplotlib.pyplot as plt
 UPLOAD_PATH=os.getcwd()+"/static/music_repository"
-
+SAVE_PATH=os.getcwd()+"/static/image_plot"
 
 
 DEBUG=True
@@ -35,19 +36,19 @@ def mapper(mfcc):
 
 @app.route('/')
 def adder():
-	return render_template('panel.html')
+
+	return render_template('panel.html',panel_path='/static/image_plot')
 
 
 
 
 @app.route('/sent',methods=['POST'])
 def getSent():
-	return 1
 	if request.method!='POST':
 		return '{emotion:invalid request method submit a post request}'
 	voice=request.files['file']
 	filename=secure_filename(voice.filename)	
-	format_audio=request.form['audio_format']
+	format_audio=request.form['format']
 	path=os.path.join(app.config['UPLOAD_FOLDER'],filename)
 	voice.save(path)
 	temp="AudioSegment.from_"+str(format_audio)+"('"+path+"')"
@@ -61,6 +62,9 @@ def getSent():
 	os.remove(path)	
 	print('y sr computed')
 	mfcc=librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13)
+	librosa.display.specshow(mfcc, x_axis='time')
+	plt.savefig(os.path.join(SAVE_PATH,filename+".png"))
+	plt.close()
 	mfcc=np.array(map(mapper,mfcc))
 	mfcc=mfcc.max(axis=0)
 	fnn=NetworkReader.readFrom(FNN_PATH)
@@ -72,9 +76,9 @@ def getSent():
 			max_index=foo
 			max_value=fnn[foo]
 	if max_index==0:
-		return "{emotion:Happy}"
+		return '{"emotion":"Happy","image":"'+filename+'.png"}'
 	elif max_index==1:
-		return "{emotion:Angry}"
+		return '{"emotion":"Angry","image":"'+filename+'.png"}'
 
 
 
@@ -88,6 +92,6 @@ def givemeXML():
 
 
 if __name__=='__main__':
-	app.run()
+	app.run(port=5002)
 
 

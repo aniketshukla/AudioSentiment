@@ -16,7 +16,7 @@
 .xamper{
 	border-color: black;
 	border-width: 10px;
-	background-color: ;
+	
 }
 .panel_header{
 background-color: black;
@@ -144,7 +144,7 @@ input[type="file"] {
    border-color: black;
    
 }
-input[type="submit"] {
+input[type="button"] {
    height: 50px;
    font-size: 10px;
    border-width: 2px;
@@ -154,6 +154,10 @@ input[type="submit"] {
    font-weight: bold;
    width: 400px;
 }
+body{
+	background-size: cover;
+}
+
 </style>
 </head>
 <body>
@@ -192,7 +196,6 @@ input[type="submit"] {
 <div class="container-fluid padder">
 <div class="row-md-12 row-sm-12 row-lg-12 spacer1 " >
 <div class="row-md-12 spacer1">
-<h3 style="color:white">Add any audio file,any format other than mp3 or mp4 would work and get the sentiment of the file</h3>
 </div> 
 <form class="form-inline" action="/sent" method="post" enctype="multipart/form-data">
 
@@ -204,7 +207,7 @@ input[type="submit"] {
 <input type="text"  class="spacer3 form-control format" name="format" placeholder="Enter file format" required>
 </div>
 <div class="form-group col-md-4 spacer1 panel42">
-<input type="submit" class="spacer3 form-control" value="getSentiment" >
+<input type="button" class="spacer3 form-control button1" value="getSentiment" >
 </div>
 <div class="row-md-4 row-sm-4 row-lg-4 spacer1">
 </div>
@@ -212,8 +215,39 @@ input[type="submit"] {
 </form>
 </div>
 </div>
+<div class="row-md-4 row-sm-4 row-lg-4 spacer1">
+<div class="col-md-4 col-sm-4 col-lg-4 spacer1">
+</div>
+<div class="col-md-4 col-sm-4 col-lg-4 ">
+<div class="col-md-2">
+</div>
+<img src="" class="picture_this">
+</div>
+<div class="col-md-4 col-sm-4 col-lg-4 spacer1">
+</div>
 <script type="text/javascript">
+var ajax_data;
+var burger="{{panel_path}}"
+function button_click(){
+	if (1){
 
+				alert("changing");
+			var element=$(".file")[0].files[0];
+			var file_format=$(".format").val();
+			var formdata=new FormData();
+			formdata['file']=element;
+			formdata['format']=file_format;
+			$.ajax({
+				url:'/sent',
+				type:'POST',
+				contentType:false,
+				data:formdata,
+				cache:false,
+				processData:false
+			}
+				)
+			}
+}
 	$(document).ready(
 		function(){
 			$(".format").focusout(
@@ -229,30 +263,51 @@ input[type="submit"] {
 
 		)
 	//using xhr2
-	var ajax_data;
+	
 	$(document).ready(
 		function(){
-			if ( $('.file').change() || $('.format').change()){
-			var element=$(".file")[0].files[0];
-			var file_format=$(".format").val();
-			var formdata=new FormData();
-			formdata['file']=element;
-			formdata['format']=file_format;
-			ajax_data=$.ajax({
-				url:'/sent',
-				type:'POST',
-				contentType:false,
-				data:formdata,
-				cache:false,
-				processData:false
-			}
-				)
-			}
-		}
+			 $(".button1").click(
+
+			 	function(){
+			 		var element=$(".file")[0].files[0];
+					var file_format=$(".format").val();
+					var formdata=new FormData();
+					formdata.append('file',element);
+					formdata.append('format',file_format);
+					alert('starting');
+					$.ajax(
+					{
+						url:'/sent',
+						type:'POST',
+						data:formdata,
+						cache:false,
+						contentType:false,
+						processData:false,
+						success: function(data){
+        alert(data);
+        ajax_data=JSON.parse(data);
+        alert('/static/image_plot/'+ajax_data.image);
+       	 $("body").css('background-image','url(' + burger+'/'+ajax_data.image +')');
+       	 if (ajax_data.emotion=='Angry'){
+       	 	$(".picture_this").prop("src","/static/angry.png");
+       	 }
+       	 else if (ajax_data.emotion=="Happy"){
+       	 	$(".picture_this").prop("src","/static/happy.png");	
+       	 }
+    }
+
+					}
+						);
+					});
+
+			 	}
 
 
 
-		)
+
+
+			 	);
+		
 
 </script>
 </body>
