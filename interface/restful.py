@@ -48,7 +48,8 @@ def getSent():
 		return '{emotion:invalid request method submit a post request}'
 	voice=request.files['file']
 	filename=secure_filename(voice.filename)	
-	format_audio=request.form['format']
+	format_audio=filename.split('.')[-1]#request.form['format']
+	print(format_audio)
 	path=os.path.join(app.config['UPLOAD_FOLDER'],filename)
 	voice.save(path)
 	temp="AudioSegment.from_"+str(format_audio)+"('"+path+"')"
