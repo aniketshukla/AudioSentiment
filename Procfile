@@ -1,3 +1,3 @@
-cd interface
-web:python restful.py
+web: sh -c 'cd ./interface/ && python restful.py'
+
 
