@@ -1,3 +1,3 @@
-cd /interface
+cd interface
 web:python restful.py
 
