@@ -13,6 +13,16 @@
 <script src="{{ url_for('static', filename='jqueryui/jquery-ui.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jqueryui/jquery-ui.min.css') }}"/>
 <style type="text/css" media="screen">
+.spacer_the_one{
+	
+	padding: 0px;
+	max-width: 33%;
+	padding-left: 0px;
+	float: left;
+	overflow: hidden;
+
+}
+
 .xamper{
 	border-color: black;
 	border-width: 10px;
@@ -134,7 +144,7 @@ input[type="text"] {
    font-size: 16px;
    border-width: 2px;
    border-color: black;
-   
+
 }
 input[type="file"] {
    height: 50px;
@@ -142,6 +152,7 @@ input[type="file"] {
    border-width: 2px;
    padding: 0px;
    border-color: black;
+   width:700px;
    
 }
 input[type="button"] {
@@ -223,7 +234,8 @@ body{
 </div>
 <img src="" class="picture_this">
 </div>
-<div class="col-md-4 col-sm-4 col-lg-4 spacer1">
+<div class="col-md-2 col-sm-2 col-lg-2 spacer_the_one">
+<img src="" class="picture_that">
 </div>
 <script type="text/javascript">
 var ajax_data;
@@ -287,7 +299,8 @@ function button_click(){
         alert(data);
         ajax_data=JSON.parse(data);
         alert('/static/image_plot/'+ajax_data.image);
-       	 $("body").css('background-image','url(' + burger+'/'+ajax_data.image +')');
+       	 //$("body").css('background-image','url(' + burger+'/'+ajax_data.image +')');
+       	 $(".picture_that").prop("src","static/image_plot/"+ajax_data.image)
        	 if (ajax_data.emotion=='Angry'){
        	 	$(".picture_this").prop("src","/static/angry.png");
        	 }
