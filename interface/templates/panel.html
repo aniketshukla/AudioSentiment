@@ -13,6 +13,12 @@
 <script src="{{ url_for('static', filename='jqueryui/jquery-ui.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='jqueryui/jquery-ui.min.css') }}"/>
 <style type="text/css" media="screen">
+.tumba{
+	font-size:35px ;
+	background-color: rgb(0, 102, 26);
+	color:white;
+}
+
 .chupa_do_mujhko{
 	height: 0%;
 }
@@ -37,7 +43,8 @@
 	
 	-moz-transform:scale(0.5);
     -webkit-transform:scale(0.5);
-    transform:scale(0.5)
+    transform:scale(0.5);
+    visibility: hidden;
 }
 .disappear{
 	width: 100%;
@@ -480,13 +487,11 @@ padding-left: 160px;
 padding-top: 50px;
 background-color:#008BBA; 
 }
-.panel42:hover{
-opacity: 1;
-background-color:#DF514C; 
-}
 .panel42{
-background-color: black;
- 
+padding-top: 50px;
+padding-left: 160px;
+background-color:#DF514C; 
+
 }
 
 .pip1{ 
@@ -526,15 +531,17 @@ background-color: black;
 
 input[type="text"] {
    height: 50px;
-
+   background-color: #008BBA;
    font-size: 16px;
    border-width: 2px;
    border-color: black;
+   font-size: 20px;
+   color: white;
 
 }
 input[type="file"] {
    height: 50px;
-   font-size: 10px;
+   font-size: 20px;
    border-width: 2px;
    padding: 0px;
    border-color: black;
@@ -542,17 +549,24 @@ input[type="file"] {
    
 }
 input[type="button"] {
-   width:400%;
-   height:100%;
-   font-size: 40px;
-   border-width: 2px;
-   border-color: black;
-   border-radius:16x; 
-   background-color:#DC403B ;
-   color:black;
-   font-weight: bold;
+   
+   height:50px;
+   font-size: 35px;
+   font-style: initial;
+   border-radius: 4px;
+ 	color: white;  
+   background-color:rgb(26, 188, 156);
+   border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-top-width: 0px;
+box-sizing: border-box;
+   
    
 }
+.button1{
+	background-color:#85C4B9 ;
+}
+
 body{
 	background-size: cover;
 }
@@ -569,9 +583,94 @@ body{
    border-radius: 20px;
 }
 
-.btn-block:hover{
-background-color: #0088CC;
+
+
+/*alternate button css */
+
+.container { width: 500px; text-align: center; margin: auto;}
+.copyright { margin-top: 50px; font-size: 12px; text-transform: uppercase; }
+.copyright a { text-decoration: none; padding: 5px;background: #c0392b; color: #FFFFFF; }
+.copyright a:hover { background: transparent; color: #c0392b; }
+
+.button {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  padding-right: 30px;
+  padding-left: 70px;
+  position: relative;
+  background-color:rgb(41,127,184);
+  color:rgb(255,255,255);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  
+  
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  text-shadow:0px 1px 0px rgba(0,0,0,0.5);
+-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ff123852,Positive=true)";zoom:1;
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ff123852,Positive=true);
+
+  -moz-box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  -webkit-box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  box-shadow:0px 2px 2px rgba(0,0,0,0.2);
+  -ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=2,Color=#33000000,Positive=true)";
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=2,Color=#33000000,Positive=true);
 }
+
+.button span {
+  position: absolute;
+  left: 0;
+  width: 50px;
+  background-color:rgba(0,0,0,0.5);
+  
+  -webkit-border-top-left-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+border-right: 1px solid  rgba(0,0,0,0.15);
+}
+
+.button:hover span, .button.active span {
+  background-color:rgb(0,102,26);
+  border-right: 1px solid  rgba(0,0,0,0.3);
+}
+
+.button:active {
+  margin-top: 2px;
+  margin-bottom: 13px;
+
+  -moz-box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+-webkit-box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+box-shadow:0px 1px 0px rgba(255,255,255,0.5);
+-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true)";
+filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=0,OffY=1,Color=#ccffffff,Positive=true);
+}
+
+.button.orange {
+  background: #FF7F00;
+}
+
+.button.purple {
+  background: #8e44ad;
+}
+
+.button.turquoise {
+  background: #1abc9c;
+}
+
+.button.red {
+  background: #e74c3c;
+}
+
+
+/* alternate */
+
 
 </style>
 </head>
@@ -641,17 +740,25 @@ background-color: #0088CC;
 </div> 
 <form class="form-inline" action="/sent" method="post" enctype="multipart/form-data">
 
-<div class="form-group col-md-4 spacer1 panel12">
-<div class="col-lg-12">
-<input type="file" class="spacer3 form-control file" name="file" accept="audio/*" required>
-</div>
+<div class="row">
+<div class="col-lg-4 spacer1 panel12">
+
+<input type="file" class="  file  col-lg-8" name="file" accept="audio/*" required>
+
 </div>
 
 <div class="form-group col-md-4 spacer1 panel32" >
-<input type="text"  class="spacer3 form-control format" name="format" placeholder="Enter file format" required>
+<input type="text"  class="spacer3 form-control format input-large" name="format" value="Enter file format" required>
 </div>
 <div class="form-group col-md-4 spacer1 panel42">
-<input type="button" class="spacer3 form-control button1 btn-block" value="getSentiment" >
+<div class="form-group">
+    <label class="sr-only" for="exampleInputAmount"></label>
+    <div class="input-group">
+      <div class="input-group-addon tumba">&#9835;</div>
+     <input type="button" class="form-control button1 " value="getSentiment" >
+    </div>
+  </div>
+
 </div>
 <div class="row-md-4 row-sm-4 row-lg-4 spacer1">
 </div>
@@ -676,6 +783,7 @@ background-color: #0088CC;
 </div>
 <script type="text/javascript">
 var ajax_data;
+var one_time=0;
 var burger="{{panel_path}}"
 function button_click(){
 	if (1){
@@ -699,8 +807,22 @@ function button_click(){
 }
 	$(document).ready(
 		function(){
+			$(".format").click(
+				function(){
+					
+					if (one_time==0){
+						$(".format").prop("value","");
+						one_time=1;
+					}
+				}
+			);
+
 			$(".format").focusout(
 				function(){
+					if ($(".format").val()==""){
+						$(".format").prop("value","Enter file format");
+						one_time=0;
+					}
 					if ($(".format").val()=='mp3' || $('.format').val()=='mp4' ){
 						alert('Mp3 and mp4 is not supported in this version..upload flv to get result');
 						$(".format").prop("value","");
@@ -710,7 +832,7 @@ function button_click(){
 				)
 		}
 
-		)
+		);
 	//using xhr2
 	
 	$(document).ready(
