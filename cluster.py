@@ -3,6 +3,7 @@ from numpy import array
 from scipy.cluster.vq import vq,kmeans,whiten
 import redis
 import numpy
+import numpy as np
 from random import choice
 con=redis.Redis('localhost')
 parameters=['happy','angry','unhapppy','neutral']
@@ -54,8 +55,6 @@ count1=0
 for j in value_parameters_error:
 	if sum(j)==0:
 		continue
-	print(sum(j[0:-2]))
-	print(sum(j))
 	error_cluster[count1]=float(sum(j[0:-2]))/float(sum(j))
 	count1=count1+1
 
@@ -63,6 +62,7 @@ for j in value_parameters_error:
 error_final1=sum(error_cluster)/len(parameters)
 error_final2=max(error_cluster)
 
-
+print(error_final1)
+print(error_final2)
 
 
