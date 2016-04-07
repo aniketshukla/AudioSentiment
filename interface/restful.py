@@ -73,7 +73,7 @@ def getSent():
 	max_index=0
 	max_value=fnn[0]
 	for foo in range(1,len(fnn)):
-		if fnn[foo]>max:
+		if fnn[foo]>max_value:
 			max_index=foo
 			max_value=fnn[foo]
 	if max_index==0:

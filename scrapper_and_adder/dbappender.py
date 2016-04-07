@@ -47,9 +47,12 @@ def main():
 		try:
 			print(file_name+" computation begins")
 			y,sr= librosa.load(add_path+'/'+file_name)
-			print("y sr computed")
+			#print(y)
+			#print(np.shape(y))
+			#print("y sr computed")
 			mfcc=librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13)
 			mfcc=np.array(map(mapper,mfcc))
+			print(mfcc)
 			mfcc=mfcc.max(axis=0)
 			print("mfcc computed")
 			r_server.rpush(add_emotion,add_emotion+'_'+file_name)

@@ -2,10 +2,19 @@ import cv2
 import sys
 import os
 import time
+import sounddevice as sd
+MAX_FRAME_RATE=300
+DURATION=35
+#using nonblocking recorder
 #initialising 
 
 
 def capture():
+	frame_count=0
+	duration=DURATION
+	sd.default.samplerate=22050
+	sd.default.channels=1
+	myrecording=sd.rec(duration*22050)
 	vc=cv2.VideoCapture(0)
 	cascade="/home/aniket/Desktop/code/face_recog/haarcascade_classifier/smile.xml"
 	rval,frame=vc.read()
@@ -16,6 +25,7 @@ def capture():
 
 	multiple_face_counter=0
 	while rval:
+		print('current frame count',frame_count)
 		print(multiple_face_counter)
 		faceCascade=cv2.CascadeClassifier(cascade)
 		image_read=frame
@@ -41,6 +51,8 @@ def capture():
 			cv2.imshow('12104684',image_read)
 			cv2.waitKey(40)
 		elif len(faces)==0:
+			cv2.imshow('12104684',image_read)
+			cv2.waitKey(40)
 			print('0 face detected')
 		else:
 			print('more than one face detected')
@@ -55,10 +67,14 @@ def capture():
 			except:
 				print('more than one face detected')
 		rval,frame=vc.read()
+		frame_count=frame_count+1
+		if frame_count>MAX_FRAME_RATE:
+			break
+	return myrecording
 
 		
 def internal():
-
+	fps=0
 	vc=cv2.VideoCapture(0)
 
 	rval,frame=vc.read()
@@ -100,7 +116,8 @@ def internal():
 				cv2.waitKey(40)
 		
 		rval,frame=vc.read()
-
+		fps=fps+1
+		print('fps',fps)
 	#cv2.waitKey(0)
 	
 
