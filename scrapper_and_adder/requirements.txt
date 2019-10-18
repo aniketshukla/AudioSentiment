@@ -96,7 +96,7 @@ pytest==2.7.2
 python-apt===0.9.3.5ubuntu1
 python-dateutil==1.5
 python-debian===0.1.21-nmu2ubuntu2
-python-engineio==0.7.2
+python-engineio==3.8.2.post1
 python-socketio==0.6.1
 pytz==2012rc0
 pyxdg==0.25
