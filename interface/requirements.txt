@@ -129,6 +129,6 @@ uTidylib==0.2
 vboxapi==1.0
 virtualenv==13.1.2
 websocket-client==0.34.0
-Werkzeug==0.11.dev0
+Werkzeug==0.15.3
 Yapsy==1.11.223
 zope.interface==4.0.5
