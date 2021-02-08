@@ -34,7 +34,7 @@ gevent==1.0.2
 greenlet==0.4.9
 gyp==0.1
 html5lib==0.999
-httplib2==0.8
+httplib2==0.19.0
 ipykernel==4.1.0
 ipython==4.0.0
 ipython-genutils==0.1.0
