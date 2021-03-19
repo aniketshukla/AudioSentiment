@@ -2,7 +2,7 @@ Flask==0.10.1
 Flask-Login==0.2.11
 Flask-RESTful==0.3.4
 Flask-SocketIO==1.0
-Jinja2==2.7.3
+Jinja2==2.11.3
 PyBrain==0.3
 redis==2.10.3
 librosa==0.4.0
