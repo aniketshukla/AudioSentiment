@@ -75,7 +75,7 @@ Pillow==2.3.0
 piston-mini-client==0.7.5
 protobuf==2.5.0
 ptyprocess==0.5
-py==1.4.30
+py==1.10.0
 PyBrain==0.3
 pycrypto==2.6.1
 pycups==1.9.66
