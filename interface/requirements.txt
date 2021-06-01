@@ -124,7 +124,7 @@ tweepy==3.1.0
 Twisted-Core==13.2.0
 Twisted-Names==13.2.0
 Twisted-Web==13.2.0
-urllib3==1.7.1
+urllib3==1.26.5
 uTidylib==0.2
 vboxapi==1.0
 virtualenv==13.1.2
