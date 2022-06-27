@@ -104,7 +104,7 @@ pyzmq==14.0.1
 qbzr==0.23.1
 radiotray==0.7.3
 redis==2.10.3
-reportlab==3.0
+reportlab==3.5.55
 requests==2.8.1
 requests-oauthlib==0.4.1
 scikit-learn==0.17
