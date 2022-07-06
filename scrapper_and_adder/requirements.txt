@@ -33,7 +33,7 @@ functools32==3.2.3.post2
 gevent==1.0.2
 greenlet==0.4.9
 gyp==0.1
-html5lib==0.999
+html5lib==0.999999999
 httplib2==0.8
 ipykernel==4.1.0
 ipython==4.0.0
