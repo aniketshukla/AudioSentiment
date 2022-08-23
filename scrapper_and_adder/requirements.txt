@@ -55,7 +55,7 @@ mercurial==2.8.2
 mistune==0.7.1
 mysql-connector-python==1.1.6
 MySQL-python==1.2.3
-nbconvert==4.0.0
+nbconvert==6.5.1
 nbformat==4.0.1
 nemo-emblems==0.0.1
 networkx==1.10
