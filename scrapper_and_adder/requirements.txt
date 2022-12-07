@@ -8,7 +8,7 @@ BeautifulSoup==3.2.1
 bicyclerepair==0.9
 bpython==0.12
 bzr==2.7.0.dev1
-certifi==14.5.14
+certifi==2022.12.7
 chardet==2.0.1
 cloudpickle==0.1.1
 colorama==0.2.5
